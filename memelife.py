@@ -5,6 +5,11 @@ import json
 app = flask.Flask(__name__)
 
 
+@app.route('/')
+def home():
+    return flask.render_template('index.html')
+
+
 @app.route('/url')
 def url_info():
     """

@@ -23,15 +23,8 @@
     </header>
 
     <section class="content">
-            <form>
-<label for="url">Trace a meme:</label>
-<input type="text" name="url" id="url" placeholder="Enter a URL to trace its usage"></input>
-<input type="submit" value="Find it!" id="submit"></input>
-</form>
-
-<div id="plot_canvas" class="plot">
-    <svg width="800" height="400"></svg>
-</div>
+            {% block content %}
+            {% endblock %}
     </section>
 </body>
 </html>
