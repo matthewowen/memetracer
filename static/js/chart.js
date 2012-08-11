@@ -9,9 +9,8 @@ function plotOverTime (values) {
         .attr("class", function(d) { return d.source; });
 }
 
-$(document).ready(function () {
-    'use strict';
-    $.getJSON("/url?url=i.imgur.com%2FhKmUq.gif",
+function chart_url(url) {
+    $.getJSON("/url?url="+url,
         function(data) {
             var red = data['reddit_results'];
             var fb = data['reddit_results'];
@@ -36,4 +35,15 @@ $(document).ready(function () {
             }
             plotOverTime(results);
         });
+}
+
+$(document).ready(function () {
+    'use strict';
+    $('#submit').click(
+        function(e){
+            e.preventDefault();
+            chart_url($('#url').val());
+            return false;
+        });
 });
+
