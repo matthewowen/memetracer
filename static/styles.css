@@ -13,13 +13,17 @@ sub{vertical-align:text-bottom;}
 input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}
 input,textarea,select{*font-size:100%;}
 legend{color:#000000;}
-html{background-color:#ffffff;}
-body{width:960px;color:#232323;font-family:'Open Sans',Sans-Serif;line-height:1.5;}
+html{background-color:#232323;}
+body{width:940px;color:#ffffff;font-family:'Open Sans',Sans-Serif;line-height:1.5;padding:10px;}
+header{padding-bottom:10px;}header h1,header p{text-align:center;}
+form{text-align:center;}
+.drop-button{display:block;width:150px;text-align:center;margin:10px auto;}
+.meme-url{width:400px;}
 .plot{width:800px;}
-h1{font-size:2em;}
+h1{font-size:3em;}
 h2{font-size:2em;}
 h3{font-size:1.5em;}
 h4{font-size:1.2em;}
 h5{font-size:1em;}
-.facebook{fill:red;}
-.reddit{fill:blue;}
+.facebook{fill:#b52c38;}
+.reddit{fill:#536682;}

@@ -2,9 +2,8 @@
 
 {% block content %}
 <form>
-<label for="url">Trace a meme:</label>
-<input type="text" name="url" id="url" placeholder="Enter a URL to trace its usage"></input>
-<a id="submit">Find it!</a>
+<input type="text" name="url" id="url" class="meme-url" placeholder="Enter a URL to trace its usage"></input>
+<input type="button" id="submit" value="Find it!" class="drop-button"></input>
 </form>
 
 <div id="plot_canvas" class="plot">

@@ -4,18 +4,47 @@ html{color:#000;background:#FFF}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre
 // colours
     @black: #232323;
     @white: white;
+    @blue: #536682;
+    @red: #B52C38;
+    @orange: #D9964B;
+    @beige: #EBD1B0;
+    @salmon: #DE6846;
 
     @sans-font: 'Open Sans', Sans-Serif;
 
 html {
-    background-color: @white;
+    background-color: @black;
 }
 
 body {
-    width: 960px;
-    color: @black;
+    width: 940px;
+    color: @white;
     font-family: @sans-font;
     line-height: 1.5;
+    padding: 10px;
+}
+
+header {
+    h1, p {
+        text-align: center;
+    }
+
+    padding-bottom: 10px;
+}
+
+form {
+    text-align: center;
+}
+
+.drop-button {
+    display: block;
+    width: 150px;
+    text-align: center;
+    margin: 10px auto;
+}
+
+.meme-url {
+    width: 400px;
 }
 
 .plot {
@@ -25,7 +54,7 @@ body {
 // headings
 
 h1 {
-    font-size: 2em;
+    font-size: 3em;
 }
 
 h2 {
@@ -47,9 +76,9 @@ h5 {
 // chart styles
 
 .facebook {
-    fill: red;
+    fill: @red;
 }
 
 .reddit {
-    fill: blue;
+    fill: @blue;
 }
