@@ -73,12 +73,39 @@ h5 {
     font-size: 1em;
 }
 
+a {
+    color: @white;
+    text-decoration: underline;
+    &:hover {
+        text-decoration: none;
+    }
+}
+
 // chart styles
 
 .facebook {
     fill: @red;
+    stroke: @black;
 }
 
 .reddit {
     fill: @blue;
+    stroke: @black;
+}
+
+// overlays
+
+aside {
+    display: block;
+}
+
+.overlay {
+    display: none;
+    background-color: @black;
+    border: 2px solid @white;
+    box-shadow: 2px 2px 1px #888;
+    border-radius: 5px;
+    padding: 10px;
+    position: absolute;
+    width: 300px;
 }

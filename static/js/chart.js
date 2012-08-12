@@ -1,90 +1,97 @@
 function plotOverTime (values) {
-    var x = d3.time.scale().range([100, 700])
+    var x = d3.time.scale.utc().range([100, 700])
         .domain([d3.min(values, function(d){
             return d.time;
         }), d3.max(values, function(d){
             return d.time;
-        })
-        ]);
-    var axis = d3.svg.axis().scale(x);
-    var svg = d3.selectAll('svg')
-    svg.selectAll("circle")
-        .data(values)
-    .enter().append("circle")
+        })]);
+    var axis = d3.svg.axis().scale(x).ticks(6);
+    var svg = d3.selectAll('svg');
+    svg.call(axis);
+    console.log(values);
+    var circle = svg.selectAll("circle")
+        .data(values);
+    circle.enter()
+        .append("circle")
         .attr("cy", 90)
         .attr("cx", function(d) { return x(d.time); })
-        .attr("r", function(d) { return Math.sqrt(d.interactions); })
-        .attr("class", function(d) { return d.source; });
-    svg.call(axis);
+        .attr("r", function(d) { return Math.sqrt(d.score); })
+        .attr("class", function(d) { return d.source; })
+        .attr("data-title", function(d) { return d.title; })
+        .attr("data-href", function(d) { return d.href; })
+        .attr("data-score", function(d) { return d.score; })
+        .attr("data-date", function(d) { return (d3.time.format('%d %B, %H:%M')(new Date(d.time))); });
+
+    circle.exit().remove()
 }
 
-/*
-function drawChartGrid (start, end) {
-    // Takes start and end times (seconds since unix epoch)
-    // Calculates range, draws appropriate grid
-    // Adds labels to grid
-    var division, lines, width, range = (end - start);
-    if (range > 604800) {
-        // range is more than a week
-        // break it up into one day lines
-        division = 86400;
-        lines = Math.floor(range / 86400);
-        // first line is 100px in
-        width = $('#plot-canvas').width() - 100;
-
-    }
-    else if (range > 86400) {
-        // range is more than a day
-    }
-    else if (range > 3600) {
-        // range is more than an hour
-    }
-    else {
-        // range is less than an hour
-    }
-
+function clearOverlays () {
+    $('.overlay').remove();
 }
-*/
 
-function chart_url(url) {
+function createOverlays () {
+    $('.reddit').each(function(index) {
+        var h, view = {
+            url: $(this).attr('data-href'),
+            title: $(this).attr('data-title'),
+            date: $(this).attr('data-date'),
+            score: $(this).attr('data-score'),
+        };
+
+        h = $(Mustache.render(reddit, view));
+        $('.content').append(h);
+
+        h.css('left', $(this).offset()['left'])
+            .css('top', $(this).offset()['top'] + 100);
+
+        $(this).click(function(){
+            h.fadeIn('fast',
+                function(){
+                    $('#plot_canvas').click(function(){
+                        h.fadeOut('fast',
+                            function(){
+                                $('#plot_canvas').off('click');
+                            });
+                    })
+                }
+            )
+        });
+    });
+}
+
+function chart_url (url) {
     $.getJSON("/url?url="+url,
         function(data) {
             var red = data['reddit_results'];
             var fb = data['facebook_results'];
             var results = [];
-            var start = red[0]['timestamp']
-            var end = red[(red.length - 1)]['timestamp']
-            if (fb[0]['timestamp'] < start) {
-                start = fb[0]['timestamp'];
-            }
-            if (fb[(fb.length - 1)]['timestamp'] > end) {
-                end = fb[0]['timestamp'];
-            }
             for (var i = 0; i < red.length; i++) {
                 results.push({
-                    time: (red[i]['timestamp']),
-                    interactions: red[i]['score'],
-                    source: 'reddit'
+                    time: (red[i]['timestamp']*1000),
+                    score: red[i]['score'],
+                    source: 'reddit',
+                    title: red[i]['title'],
+                    href: "http://reddit.com/" + red[i]['id']
                 })
             }
             for (var i = 0; i < fb.length; i++) {
                 results.push({
-                    time: (fb[i]['timestamp']),
-                    interactions: 10,
+                    time: (fb[i]['timestamp']*1000),
+                    score: 10,
                     source: 'facebook'
                 })
             }
-            plotOverTime(results, start, end);
+            plotOverTime(results);
+            clearOverlays();
+            createOverlays();
         });
 }
 
 $(document).ready(function () {
     'use strict';
-    $('#submit').click(
-        function(e){
-            e.preventDefault();
-            chart_url($('#url').val());
-            return false;
-        });
+    $('#meme_form').submit(function(){
+        chart_url($('#url').val());
+        return false;
+    });
 });
 
