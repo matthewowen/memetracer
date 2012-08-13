@@ -6,7 +6,19 @@
 <input type="button" id="submit" value="Find it!" class="drop-button"></input>
 </form>
 
-<div id="plot_canvas" class="plot">
-    <svg width="800" height="400"></svg>
+<aside class="key">
+    <span class="label url">URL:</span><h2 class="value url">url goes here</h2>
+</aside>
+
+<div id="plot_canvas" class="plot chart">
+    <svg width="900" height="200"></svg>
+</div>
+<div class="key chart">
+    <svg width="500" height="100">
+        <circle r="40" cy="50" cx="50" class="reddit"></circle>
+        <text y="50" x="100">Reddit</text>
+        <circle r="40" cy="50" cx="250" class="facebook"></circle>
+        <text y="50" x="300">Facebook</text>
+    </svg>
 </div>
 {% endblock %}

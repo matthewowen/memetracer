@@ -1,12 +1,15 @@
 function plotOverTime (values) {
-    var x = d3.time.scale.utc().range([100, 700])
+    var x = d3.time.scale.utc().range([100, 800])
         .domain([d3.min(values, function(d){
             return d.time;
         }), d3.max(values, function(d){
             return d.time;
         })]);
-    var axis = d3.svg.axis().scale(x).ticks(6);
-    var svg = d3.selectAll('svg');
+    var axis = d3.svg.axis()
+        .scale(x)
+        .ticks(10)
+        .tickSize(180, 180, 0);
+    var svg = d3.selectAll('.plot svg');
     svg.call(axis);
     console.log(values);
     var circle = svg.selectAll("circle")
@@ -47,10 +50,10 @@ function createOverlays () {
         $(this).click(function(){
             h.fadeIn('fast',
                 function(){
-                    $('#plot_canvas').click(function(){
+                    $('.content').click(function(){
                         h.fadeOut('fast',
                             function(){
-                                $('#plot_canvas').off('click');
+                                $('.content').off('click');
                             });
                     })
                 }
@@ -84,6 +87,7 @@ function chart_url (url) {
             plotOverTime(results);
             clearOverlays();
             createOverlays();
+            $('.key .value.url').text(url);
         });
 }
 

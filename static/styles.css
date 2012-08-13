@@ -15,18 +15,26 @@ input,textarea,select{*font-size:100%;}
 legend{color:#000000;}
 html{background-color:#232323;}
 body{width:940px;color:#ffffff;font-family:'Open Sans',Sans-Serif;line-height:1.5;padding:10px;}
-header{padding-bottom:10px;}header h1,header p{text-align:center;}
+header{padding-bottom:10px;}header h1,header p{display:inline-block;}
+header p{padding-left:20px;}
 form{text-align:center;}
 .drop-button{display:block;width:150px;text-align:center;margin:10px auto;}
 .meme-url{width:400px;}
-.plot{width:800px;}
+.plot{width:900px;border:#ffffff solid 1px;border-radius:5px;margin:0 auto 40px;}
+.chart svg line{stroke:#ffffff;fill:#ffffff;opacity:0.5;}
+.chart svg text{stroke:#ffffff;fill:#ffffff;}
+.chart svg .plot text{font-size:0.8em;}
+.chart svg circle{opacity:0.5;}.chart svg circle:hover{opacity:1;cursor:pointer;}
+.chart svg .facebook{fill:#b52c38;stroke:#232323;}
+.chart svg .reddit{fill:#536682;stroke:#232323;}
+.key{padding:0 20px 10px;}
+.value,.label{display:inline-block;}
+.label{font-size:1.5em;padding-right:10px;}
 h1{font-size:3em;}
-h2{font-size:2em;}
+h2{font-size:1.5em;}
 h3{font-size:1.5em;}
 h4{font-size:1.2em;}
 h5{font-size:1em;}
 a{color:#ffffff;text-decoration:underline;}a:hover{text-decoration:none;}
-.facebook{fill:#b52c38;stroke:#232323;}
-.reddit{fill:#536682;stroke:#232323;}
 aside{display:block;}
 .overlay{display:none;background-color:#232323;border:2px solid #ffffff;box-shadow:2px 2px 1px #888;border-radius:5px;padding:10px;position:absolute;width:300px;}

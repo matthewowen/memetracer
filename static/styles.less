@@ -25,11 +25,15 @@ body {
 }
 
 header {
+    padding-bottom: 10px;
+
     h1, p {
-        text-align: center;
+        display: inline-block;
     }
 
-    padding-bottom: 10px;
+    p {
+        padding-left: 20px;
+    }
 }
 
 form {
@@ -48,7 +52,60 @@ form {
 }
 
 .plot {
-    width: 800px;
+    width: 900px;
+    border: @white solid 1px;
+    border-radius: 5px;
+    margin: 0 auto 40px;
+}
+
+.chart svg {
+    line {
+        stroke: @white;
+        fill: @white;
+        opacity: 0.5;
+    }
+
+    text {
+        stroke: @white;
+        fill: @white;
+    }
+
+    .plot text {
+        font-size: 0.8em;
+    }
+
+    circle {
+        opacity: 0.5;
+
+        &:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
+    }
+        
+
+    .facebook {
+        fill: @red;
+        stroke: @black;
+    }
+
+    .reddit {
+        fill: @blue;
+        stroke: @black;
+    }
+}
+
+.key {
+    padding: 0 20px 10px;
+}
+
+.value, .label {
+    display: inline-block;
+}
+
+.label {
+    font-size: 1.5em;
+    padding-right: 10px;
 }
 
 // headings
@@ -58,7 +115,7 @@ h1 {
 }
 
 h2 {
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 h3 {
@@ -79,18 +136,6 @@ a {
     &:hover {
         text-decoration: none;
     }
-}
-
-// chart styles
-
-.facebook {
-    fill: @red;
-    stroke: @black;
-}
-
-.reddit {
-    fill: @blue;
-    stroke: @black;
 }
 
 // overlays
