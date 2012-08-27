@@ -14,7 +14,6 @@ function memechart (initial) {
                 .tickSize(180, 180, 0);
             var svg = d3.selectAll('.plot svg');
             svg.call(axis);
-            console.log(values);
             var circle = svg.selectAll("circle")
                 .data(values);
             circle.enter()
@@ -112,7 +111,6 @@ function memechart (initial) {
     if (initial) {
         mc.chartURL(initial);
         $('#url').val(initial);
-        console.log('triggered');
     }
 }
 
@@ -122,7 +120,6 @@ $(document).ready(function () {
     if (window.location.pathname.indexOf('/url') === 0) {
         var url = window.location.pathname.replace('/url/', '');
         memechart(url);
-        console.log('triggered');
     }
     else {
         memechart();
