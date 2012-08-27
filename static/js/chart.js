@@ -41,7 +41,7 @@ function memechart (initial) {
                     score: $(this).attr('data-score'),
                 };
 
-                h = $(Mustache.render(reddit, view));
+                h = $(Mustache.render(templates.reddit, view));
                 $('.content').append(h);
 
                 h.css('left', $(this).offset()['left'])
@@ -85,7 +85,7 @@ function memechart (initial) {
                     }
                     // if we've not got the html there yet, we need it
                     if (!$('#chart_area').html().trim()) {
-                        $('#chart_area').html(Mustache.render(chartHTML, {}));
+                        $('#chart_area').html(Mustache.render(templates.chartHTML, {}));
                     }
                     // clear out data
                     mc.plotOverTime([]);
