@@ -14,7 +14,7 @@ input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;
 input,textarea,select{*font-size:100%;}
 legend{color:#000000;}
 html{background-color:#232323;}
-body{width:940px;color:#ffffff;font-family:'Open Sans',Sans-Serif;line-height:1.5;padding:10px;}
+body{width:940px;color:#ffffff;font-family:'Open Sans',Sans-Serif;line-height:1.5;padding:10px;margin:auto;}
 header{padding-bottom:10px;}header h1,header p{display:inline-block;}
 header p{padding-left:20px;}
 form{text-align:center;}

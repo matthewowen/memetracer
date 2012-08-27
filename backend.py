@@ -52,7 +52,7 @@ class meme(object):
             user_name
         """
         search_url = "http://graph.facebook.com/search?q=http%%3A%%2F%%2F%s" \
-            "&type=post&date_format=U" % urllib.quote(self.url)
+            "&type=post&date_format=U&limit=5000" % urllib.quote(self.url)
         r = requests.get(search_url)
         uses = r.json['data']
 

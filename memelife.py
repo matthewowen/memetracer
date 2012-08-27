@@ -10,7 +10,12 @@ def home():
     return flask.render_template('index.html')
 
 
-@app.route('/url')
+@app.route('/url/<path:url>')
+def url(url):
+    return flask.render_template('index.html')
+
+
+@app.route('/json')
 def url_info():
     """
     Returns JSON with usage info about a particular url
