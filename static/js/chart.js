@@ -110,9 +110,7 @@ function memechart (initial) {
             return rt;
         },
         establishToggle: function(url) {
-            console.log('sup')
             $('.key circle').each(function(){
-                console.log(this)
                 $(this).click(function(){
                     $('#plot_canvas circle.'+ $(this).attr('data-source')).toggle()
                 })

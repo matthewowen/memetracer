@@ -61,7 +61,7 @@ class meme(object):
         uses = []
         # have to set a limit on pages or we'll be here a long time...
         pages = 0
-        while 'paging' in r.json and pages < 10:
+        while 'paging' in r.json and pages < 5:
             uses += r.json['data']
             r = requests.get(r.json['paging']['next'])
             pages += 1
@@ -107,8 +107,7 @@ class meme(object):
         uses = r.json['results']
         # have to set a limit on pages or we'll be here a long time...
         pages = 0
-        while 'next_page' in r.json and pages < 10:
-            print pages
+        while 'next_page' in r.json and pages < 5:
             r = requests.get("http://search.twitter.com/search.json" +
                              r.json['next_page'])
             uses += r.json['results']
@@ -117,7 +116,6 @@ class meme(object):
         while uses:
             i = uses.pop()
             k = {}
-            print i['created_at'][0:-6]
             t = time.strptime(i['created_at'][0:-6], "%a, %d %b %Y %H:%M:%S")
             k['timestamp'] = time.mktime(t)
             k['id'] = i['id']
