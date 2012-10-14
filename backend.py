@@ -3,6 +3,8 @@ import urllib
 import requests
 import time
 
+user_agent = {'User-agent': 'Memetracer www.memetracer.com'}
+
 
 class meme(object):
 
@@ -24,7 +26,7 @@ class meme(object):
         """
         search_url = "http://www.reddit.com/search.json?" \
             "q=url%%3A%s&sort=new" % self.url
-        r = requests.get(search_url)
+        r = requests.get(search_url, headers=user_agent)
         uses = r.json['data']['children']
 
         self.reddit_results = []
@@ -55,7 +57,7 @@ class meme(object):
         """
         search_url = "http://graph.facebook.com/search?q=http%%3A%%2F%%2F%s" \
             "&type=post&date_format=U&limit=5000" % self.url.strip('http://').strip('https://')
-        r = requests.get(search_url)
+        r = requests.get(search_url, headers=user_agent)
         uses = []
         # have to set a limit on pages or we'll be here a long time...
         pages = 0
@@ -101,7 +103,7 @@ class meme(object):
             recent_retweets
         """
         search_url = "http://search.twitter.com/search.json?q=\"%s\"+exclude:retweets&result_type=\"popular\"" % self.url
-        r = requests.get(search_url)
+        r = requests.get(search_url, headers=user_agent)
         uses = r.json['results']
         # have to set a limit on pages or we'll be here a long time...
         pages = 0
