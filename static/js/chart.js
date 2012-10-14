@@ -26,6 +26,7 @@ function memechart (initial) {
                     return Math.sqrt(d.score * (5000 / largest));
                 })
                 .attr("class", function(d) { return d.source; })
+                .attr("data-source", function(d) { return d.source; })
                 .attr("data-title", function(d) { return d.title; })
                 .attr("data-href", function(d) { return d.href; })
                 .attr("data-score", function(d) { return d.score; })
@@ -57,42 +58,34 @@ function memechart (initial) {
                 h.fadeIn('fast');
             });
         },
+        overlayBuilder: function(node) {
+            var h, view = {
+                url: $(node).attr('data-href'),
+                title: $(node).attr('data-title'),
+                date: $(node).attr('data-date'),
+                score: $(node).attr('data-score')
+            };
+            switch($(node).attr('data-source')) {
+                case 'reddit':
+                    return $(Mustache.render(templates.reddit, view));
+                case 'facebook':
+                    view.likes = $(node).attr('data-likes');
+                    view.shares = $(node).attr('data-shares');
+                    view.user = $(node).attr('data-user');
+                    return $(Mustache.render(templates.facebook, view));
+                case 'twitter':
+                    view.retweets = $(node).attr('data-retweets');
+                    view.user = $(node).attr('data-user');
+                    return $(Mustache.render(templates.twitter, view));
+            }
+        },
         createOverlays: function () {
             // creates the overlays for all the data points
             // dom manipulation is abstracted out (it's the same for all
             // sources). ideally, should abstract out more of this.
-            $('#plot_canvas .reddit').each(function(index) {
-                var h, view = {
-                    url: $(this).attr('data-href'),
-                    title: $(this).attr('data-title'),
-                    date: $(this).attr('data-date'),
-                    score: $(this).attr('data-score')
-                };
-                h = $(Mustache.render(templates.reddit, view));
-                mc.overlayDOM(h, this);
-            });
-            $('#plot_canvas .facebook').each(function() {
-                var h, view = {
-                    url: $(this).attr('data-href'),
-                    title: $(this).attr('data-title'),
-                    date: $(this).attr('data-date'),
-                    likes: $(this).attr('data-likes'),
-                    shares: $(this).attr('data-shares'),
-                    user: $(this).attr('data-user')
-                };
-                h = $(Mustache.render(templates.facebook, view));
-                mc.overlayDOM(h, this);
-            });
-            $('#plot_canvas .twitter').each(function() {
-                var h, view = {
-                    url: $(this).attr('data-href'),
-                    title: $(this).attr('data-title'),
-                    date: $(this).attr('data-date'),
-                    retweets: $(this).attr('data-retweets'),
-                    user: $(this).attr('data-user')
-                };
-                h = $(Mustache.render(templates.twitter, view));
-                mc.overlayDOM(h, this);
+            $('#plot_canvas circle').each(function(){
+                var h = mc.overlayBuilder(this);
+                mc.overlayDOM(h, this)
             });
         },
         calculateFBScore: function(shares, likes) {
