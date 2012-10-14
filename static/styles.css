@@ -1,40 +1,239 @@
-html{color:#000;background:#ffffff;}
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
-table{border-collapse:collapse;border-spacing:0;}
-fieldset,img{border:0;}
-address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}
-ol,ul{list-style:none;}
-caption,th{text-align:left;}
-h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
-q:before,q:after{content:'';}
-abbr,acronym{border:0;font-variant:normal;}
-sup{vertical-align:text-top;}
-sub{vertical-align:text-bottom;}
-input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}
-input,textarea,select{*font-size:100%;}
-legend{color:#000000;}
-html{background-color:#232323;}
-body{width:940px;color:#ffffff;font-family:'Open Sans',Sans-Serif;line-height:1.5;padding:10px;margin:auto;}
-header{padding-bottom:10px;}header h1,header p{display:inline-block;}
-header p{padding-left:20px;}
-form{text-align:center;}
-.drop-button{display:block;width:150px;text-align:center;margin:10px auto;}
-.meme-url{width:400px;}
-.plot{width:900px;border:#ffffff solid 1px;border-radius:5px;margin:0 auto 40px;}
-.chart svg line{stroke:#ffffff;fill:#ffffff;opacity:0.5;}
-.chart svg text{stroke:#ffffff;fill:#ffffff;}
-.chart svg .plot text{font-size:0.8em;}
-.chart svg circle{opacity:0.5;-moz-transition:opacity 0.5s;-webkit-transition:opacity 0.5s;-o-transition:opacity 0.5s;transition:opacity 0.5s;}.chart svg circle:hover{opacity:0.9;cursor:pointer;}
-.chart svg .facebook{fill:#b52c38;stroke:#232323;}
-.chart svg .reddit{fill:#536682;stroke:#232323;}
-.key{padding:0 20px 10px;}
-.value,.label{display:inline-block;}
-.label{font-size:1.5em;padding-right:10px;}
-h1{font-size:3em;}
-h2{font-size:1.5em;}
-h3{font-size:1.5em;}
-h4{font-size:1.2em;}
-h5{font-size:1em;}
-a{color:#ffffff;text-decoration:underline;}a:hover{text-decoration:none;}
-aside{display:block;}
-.overlay{display:none;background-color:#232323;border:2px solid #ffffff;box-shadow:2px 2px 1px #888;border-radius:5px;padding:10px;position:absolute;width:300px;}
+html {
+  color: #000;
+  background: #ffffff;
+}
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
+  margin: 0;
+  padding: 0;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+fieldset,
+img {
+  border: 0;
+}
+address,
+caption,
+cite,
+code,
+dfn,
+em,
+strong,
+th,
+var {
+  font-style: normal;
+  font-weight: normal;
+}
+ol,
+ul {
+  list-style: none;
+}
+caption,
+th {
+  text-align: left;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
+q:before,
+q:after {
+  content: '';
+}
+abbr,
+acronym {
+  border: 0;
+  font-variant: normal;
+}
+sup {
+  vertical-align: text-top;
+}
+sub {
+  vertical-align: text-bottom;
+}
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+input,
+textarea,
+select {
+  *font-size: 100%;
+}
+legend {
+  color: #000000;
+}
+html {
+  background-color: #232323;
+}
+body {
+  width: 940px;
+  color: #ffffff;
+  font-family: 'Open Sans', Sans-Serif;
+  line-height: 1.5;
+  padding: 10px;
+  margin: auto;
+}
+body.centered {
+  margin-top: 200px;
+}
+header {
+  padding-bottom: 10px;
+  text-align: center;
+}
+header h1,
+header p {
+  display: inline-block;
+}
+header p {
+  padding-left: 20px;
+}
+form {
+  text-align: center;
+}
+.drop-button {
+  display: block;
+  width: 150px;
+  text-align: center;
+  margin: 10px auto;
+}
+.meme-url {
+  width: 400px;
+}
+.plot {
+  width: 900px;
+  border: #ffffff solid 1px;
+  border-radius: 5px;
+  margin: 0 auto 40px;
+}
+#waiting {
+  display: none;
+}
+.waiting {
+  margin: auto;
+  width: 450px;
+}
+.waiting h3 {
+  text-align: center;
+  margin-bottom: 0.5em;
+}
+.waiting img {
+  display: block;
+  margin: auto;
+  margin-bottom: 0.5em;
+}
+.chart svg line {
+  stroke: #ffffff;
+  fill: #ffffff;
+  opacity: 0.5;
+}
+.chart svg text {
+  stroke: #ffffff;
+  fill: #ffffff;
+}
+.chart svg .plot text {
+  font-size: 0.8em;
+}
+.chart svg circle {
+  opacity: 0.5;
+  -moz-transition: opacity 0.5s;
+  -webkit-transition: opacity 0.5s;
+  -o-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+.chart svg circle:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+.chart svg .facebook {
+  fill: #b52c38;
+  stroke: #232323;
+}
+.chart svg .reddit {
+  fill: #536682;
+  stroke: #232323;
+}
+.chart svg .twitter {
+  fill: #d9964b;
+  stroke: #232323;
+}
+.key {
+  padding: 0 20px 10px;
+}
+.value,
+.label {
+  display: inline-block;
+}
+.label {
+  font-size: 1.5em;
+  padding-right: 10px;
+}
+h1 {
+  font-size: 3em;
+}
+h2 {
+  font-size: 1.5em;
+}
+h3 {
+  font-size: 1.5em;
+}
+h4 {
+  font-size: 1.2em;
+}
+h5 {
+  font-size: 1em;
+}
+a {
+  color: #ffffff;
+  text-decoration: underline;
+}
+a:hover {
+  text-decoration: none;
+}
+aside {
+  display: block;
+}
+.overlay {
+  display: none;
+  background-color: #232323;
+  border: 2px solid #ffffff;
+  box-shadow: 2px 2px 1px #888;
+  border-radius: 5px;
+  padding: 10px;
+  position: absolute;
+  width: 300px;
+}

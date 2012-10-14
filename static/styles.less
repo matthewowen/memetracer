@@ -25,8 +25,13 @@ body {
     margin: auto;
 }
 
+body.centered {
+    margin-top: 200px;
+}
+
 header {
     padding-bottom: 10px;
+    text-align: center;
 
     h1, p {
         display: inline-block;
@@ -57,6 +62,26 @@ form {
     border: @white solid 1px;
     border-radius: 5px;
     margin: 0 auto 40px;
+}
+
+#waiting {
+    display: none;
+}
+
+.waiting {
+    margin: auto;
+    width: 450px;
+
+    h3 {
+        text-align: center;
+        margin-bottom: 0.5em;
+    }
+
+    img {
+        display: block;
+        margin: auto;
+        margin-bottom: 0.5em;
+    }
 }
 
 .chart svg {
@@ -96,6 +121,11 @@ form {
 
     .reddit {
         fill: @blue;
+        stroke: @black;
+    }
+
+    .twitter {
+        fill: @orange;
         stroke: @black;
     }
 }

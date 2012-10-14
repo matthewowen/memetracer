@@ -24,7 +24,7 @@ def url_info():
         return json.dumps({
             error: 'No URL supplied'
         })
-    m = backend.meme(flask.request.args.get('url').lstrip('http://'))
+    m = backend.meme(flask.request.args.get('url'))
     m.get_usage()
     return json.dumps(m.__dict__)
 

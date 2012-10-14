@@ -1,7 +1,7 @@
 import json
 import urllib
 import requests
-import redis
+import time
 
 
 class meme(object):
@@ -23,7 +23,7 @@ class meme(object):
             comments
         """
         search_url = "http://www.reddit.com/search.json?" \
-            "q=url%%3A%s&sort=new" % urllib.quote(self.url)
+            "q=url%%3A%s&sort=new" % self.url
         r = requests.get(search_url)
         uses = r.json['data']['children']
 
@@ -49,12 +49,20 @@ class meme(object):
             id
             message
             user_id
-            user_name
+            username
+            likes
+            shares
         """
         search_url = "http://graph.facebook.com/search?q=http%%3A%%2F%%2F%s" \
-            "&type=post&date_format=U&limit=5000" % urllib.quote(self.url)
+            "&type=post&date_format=U&limit=5000" % self.url.strip('http://').strip('https://')
         r = requests.get(search_url)
-        uses = r.json['data']
+        uses = []
+        # have to set a limit on pages or we'll be here a long time...
+        pages = 0
+        while 'paging' in r.json and pages < 10:
+            uses += r.json['data']
+            r = requests.get(r.json['paging']['next'])
+            pages += 1
 
         self.facebook_results = []
 
@@ -64,12 +72,60 @@ class meme(object):
             k['timestamp'] = i['created_time']
             k['id'] = i['id']
             try:
-                k['message'] = i['message']
+                k['title'] = i['message'].strip('http://' + self.url)
+                if k['title'] == "":
+                    k['title'] = 'Untitled status update'
             except KeyError:
-                k['message'] = None
+                k['title'] = 'Untitled status update'
             k['user_id'] = i['from']['id']
-            k['user_name'] = i['from']['name']
+            k['username'] = i['from']['name']
+            try:
+                k['likes'] = i['likes']['count']
+            except KeyError:
+                k['likes'] = 0
+            try:
+                k['shares'] = i['shares']['count']
+            except KeyError:
+                k['shares'] = 0
             self.facebook_results.append(k)
+
+    def get_from_twitter(self):
+        """
+        Gets usage of the url in Twitter updates
+        Sets self.results to be a list of usages of the url, oldest first
+        Each usage has:
+            timestamp posted
+            id
+            message
+            user_name
+            recent_retweets
+        """
+        search_url = "http://search.twitter.com/search.json?q=\"%s\"+exclude:retweets&result_type=\"popular\"" % self.url
+        r = requests.get(search_url)
+        uses = r.json['results']
+        # have to set a limit on pages or we'll be here a long time...
+        pages = 0
+        while 'next_page' in r.json and pages < 10:
+            print pages
+            r = requests.get("http://search.twitter.com/search.json" +
+                             r.json['next_page'])
+            uses += r.json['results']
+            pages += 1
+        self.twitter_results = []
+        while uses:
+            i = uses.pop()
+            k = {}
+            print i['created_at'][0:-6]
+            t = time.strptime(i['created_at'][0:-6], "%a, %d %b %Y %H:%M:%S")
+            k['timestamp'] = time.mktime(t)
+            k['id'] = i['id']
+            k['message'] = i['text']
+            k['username'] = i['from_user']
+            try:
+                k['recent_retweets'] = i['metadata']['recent_retweets']
+            except KeyError:
+                k['recent_retweets'] = 0
+            self.twitter_results.append(k)
 
     def get_usage(self):
         """
@@ -77,6 +133,7 @@ class meme(object):
         """
         self.get_from_facebook()
         self.get_from_reddit()
+        self.get_from_twitter()
 
     def __init__(self, url):
         """

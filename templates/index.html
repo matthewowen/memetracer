@@ -2,9 +2,13 @@
 
 {% block content %}
 <form id="meme_form">
-<input type="text" name="url" id="url" class="meme-url" placeholder="Enter a URL to trace its usage"></input>
+<input type="text" name="url" id="url" class="meme-url centered" placeholder="Enter a URL to trace its usage"></input>
 <input type="submit" id="submit" value="Find it!" class="drop-button"></input>
 </form>
-<div id="chart_area">
+<div id="waiting" class="waiting">
+    <h3>Fetching results...</h3>
+    <img alt="Loading" title="Loading" src="/static/img/spinner.gif"></img>
+    <h4>If you've submitted a popular URL, this might take a while...</h4>
 </div>
+<div id="chart_area"></div>
 {% endblock %}
