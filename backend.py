@@ -122,7 +122,7 @@ class meme(object):
             t = time.strptime(i['created_at'][0:-6], "%a, %d %b %Y %H:%M:%S")
             k['timestamp'] = time.mktime(t)
             k['id'] = i['id']
-            k['message'] = i['text']
+            k['title'] = i['text']
             k['username'] = i['from_user']
             try:
                 k['recent_retweets'] = i['metadata']['recent_retweets']
