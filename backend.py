@@ -55,7 +55,7 @@ class meme(object):
             likes
             shares
         """
-        self.facebook.results = []
+        self.facebook_results = []
         return
         # stuff below this temporarily stopped due to API oddness
         search_url = "http://graph.facebook.com/search?q=http%%3A%%2F%%2F%s" \
