@@ -115,6 +115,14 @@ class meme(object):
                              r.json['next_page'])
             uses += r.json['results']
             pages += 1
+
+        # now get the popular ones
+        search_url = "http://search.twitter.com/search.json?q=\"%s\"+exclude:retweets&result_type=popular" % self.url
+        r = requests.get(search_url, headers=user_agent)
+        # ultimately, should check for duplicates. still need to figure out a
+        # nice efficient option for that
+        uses += r.json['results']
+
         self.twitter_results = []
         while uses:
             i = uses.pop()
