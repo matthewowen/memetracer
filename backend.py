@@ -61,11 +61,9 @@ class meme(object):
         r = requests.get(search_url, headers=user_agent)
         uses = []
         # have to set a limit on pages or we'll be here a long time...
-        pages = 0
         while 'paging' in r.json:
             uses += r.json['data']
             r = requests.get(r.json['paging']['next'])
-            pages += 1
 
         self.facebook_results = []
 
@@ -103,19 +101,18 @@ class meme(object):
             user_name
             recent_retweets
         """
-        search_url = "http://search.twitter.com/search.json?q=\"%s\"+exclude:retweets&result_type=\"popular\"" % self.url
+        search_url = "http://search.twitter.com/search.json?q=\"%s\"+" \
+            "exclude:retweets&result_type=\"popular\"" % self.url
         r = requests.get(search_url, headers=user_agent)
         uses = r.json['results']
-        # have to set a limit on pages or we'll be here a long time...
-        pages = 0
         while 'next_page' in r.json:
             r = requests.get("http://search.twitter.com/search.json" +
                              r.json['next_page'])
             uses += r.json['results']
-            pages += 1
 
         # now get the popular ones
-        search_url = "http://search.twitter.com/search.json?q=\"%s\"+exclude:retweets&result_type=popular" % self.url
+        search_url = "http://search.twitter.com/search.json?q=\"%s\"+" \
+            "exclude:retweets&result_type=popular" % self.url
         r = requests.get(search_url, headers=user_agent)
         # ultimately, should check for duplicates. still need to figure out a
         # nice efficient option for that
