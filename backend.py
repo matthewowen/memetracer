@@ -55,11 +55,9 @@ class meme(object):
             likes
             shares
         """
-        self.facebook_results = []
-        return
-        # stuff below this temporarily stopped due to API oddness
-        search_url = "http://graph.facebook.com/search?q=http%%3A%%2F%%2F%s" \
-            "&type=post&date_format=U&limit=5000" % self.url.strip('http://').strip('https://')
+
+        search_url = "http://graph.facebook.com/search?q=%s" \
+            "&type=post&date_format=U&limit=5000" % self.url
         r = requests.get(search_url, headers=user_agent)
         uses = []
         # have to set a limit on pages or we'll be here a long time...
